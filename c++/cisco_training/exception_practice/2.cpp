@@ -1,0 +1,28 @@
+#include <exception>
+#include <iostream>
+#include <stdexcept>
+using namespace std;
+
+class E {};
+
+void f(int i) {
+  E e;
+  switch (i) {
+  case 0:
+    throw e;
+  case 1:
+    throw &e;
+  }
+  cout << 0;
+}
+
+int main(void) {
+  try {
+    f(2);
+  } catch (E *) {
+    cout << 1;
+  } catch (E) {
+    cout << 2;
+  }
+  return 0;
+}
